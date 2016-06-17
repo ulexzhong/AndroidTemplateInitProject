@@ -1,29 +1,47 @@
-# @author UlexZhong
+# @author UlexZhong 2016/6/13
 
 echo "create project start..."
 
 #check project name 
+#if empty
+if [ -z "$1" ];then
+echo "please input the project name,such as './bulid Test com.example '"
+echo "create project fail !"
+exit 0
+fi
+
+#if exist
 if [ -d "$1" ]; then
 echo "The project \"$1\" had exists, you must use another name"
 echo "create project fail !"
 exit 0
 fi
 
+#check project package name
+if [ -z "$2" ];then
+domain="com.example.apps";
+else
+domain=$(echo $2 | tr '[A-Z]' '[a-z]' )
+fi
+
 TEMPLATE_PROJECT_NAME="Template"
-TEMPLATE_PROJECT_LOW_NAME=$(echo $TEMPLATE_PROJECT_NAME|sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')
+TEMPLATE_PROJECT_LOW_NAME=$(echo $TEMPLATE_PROJECT_NAME | tr '[A-Z]' '[a-z]' )
+
+#get lowercase project name
+var=$(echo $1 | tr '[A-Z]' '[a-z]' )
+
+domain_dir=$(echo $domain | sed -e 's/\./\//g' )
 
 #create a new project
 mkdir $1
 
 #build new project file from template project
-cp -r $TEMPLATE_PROJECT_NAME/* $1
+cp -r $TEMPLATE_PROJECT_NAME/. $1
 
-#get lowercase project name
-var=$(echo $1|sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/')
-
-#rename file name
-echo "rename file name"
-mv $1/app/src/main/java/com/dtspread/apps/$TEMPLATE_PROJECT_LOW_NAME $1/app/src/main/java/com/dtspread/apps/$var
+#change code path
+rm -rf $1/app/src/main/java/
+mkdir -p $1/app/src/main/java/$domain_dir/$var
+cp -r $TEMPLATE_PROJECT_NAME/app/src/main/java/com/dtspread/apps/$TEMPLATE_PROJECT_LOW_NAME/* $1/app/src/main/java/$domain_dir/$var
 
 #replace application name
 echo "replace application name"
@@ -31,6 +49,7 @@ sed -i "s/$TEMPLATE_PROJECT_NAME/$1/g" `grep $TEMPLATE_PROJECT_NAME -rl $1/app`
 
 #replace application package name
 echo "replace application package name"
-sed -i "s/com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME/com.dtspreads.apps.$var/g" `grep com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME -rl $1/app`
+sed -i "s/com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME/$domain.$var/g" `grep com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME -rl $1/app`
 
 echo "All has been done !"
+
