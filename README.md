@@ -1,32 +1,3 @@
-# AndroidTemplateInitProject
-This is a shell script for ceating  a new android project with template project
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @ulexzhong
-
-1
-0
-
-    0
-
-ulexzhong/AndroidTemplateInitProject
-Code
-Issues 0
-Pull requests 0
-Wiki
-Pulse
-Graphs
-Settings
-AndroidTemplateInitProject/AndroidTemplateInitProject/readme.txt
-3e36ae8 just now
-@ulexzhong ulexzhong Update readme.txt
-25 lines (17 sloc) 1.28 KB
 
 这是一个根据模块工程生成新项目工程的脚本
 
@@ -51,8 +22,4 @@ PS:
 在更改Template模板工程时，建议导入到AS中修改验证，避免模板工程本身就存在问题
 
 -by UlexZhong
-
-    Status API Training Shop Blog About 
-
-    © 2016 GitHub, Inc. Terms Privacy Security Contact Help 
 
