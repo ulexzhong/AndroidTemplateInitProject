@@ -9,7 +9,7 @@ Template文件为AndroidStudio项目结构的模板工程
 build文件为生成脚本
 
 使用方式：
-在shell环境下输入命令： ./build ProjectName packageName 
+在shell环境下输入命令： ./build ProjectName packageName
 ProjectName 必须输入，并且该目录下唯一
 packageName 字符串以.为分割符，缺省值为com.example.apps
 例如：  ./build Test com.example.apps 
