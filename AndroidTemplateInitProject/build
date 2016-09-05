@@ -19,9 +19,10 @@ fi
 
 #check project package name
 if [ -z "$2" ];then
-domain="com.example.apps";
+package="com.example.apps";
 else
-domain=$(echo $2 | tr '[A-Z]' '[a-z]' )
+#package=$(echo $2 | tr '[A-Z]' '[a-z]' )
+package=$2
 fi
 
 TEMPLATE_PROJECT_NAME="Template"
@@ -30,7 +31,7 @@ TEMPLATE_PROJECT_LOW_NAME=$(echo $TEMPLATE_PROJECT_NAME | tr '[A-Z]' '[a-z]' )
 #get lowercase project name
 var=$(echo $1 | tr '[A-Z]' '[a-z]' )
 
-domain_dir=$(echo $domain | sed -e 's/\./\//g' )
+package_dir=$(echo $package | sed -e 's/\./\//g' )
 
 #create a new project
 mkdir $1
@@ -40,8 +41,8 @@ cp -r $TEMPLATE_PROJECT_NAME/. $1
 
 #change code path
 rm -rf $1/app/src/main/java/
-mkdir -p $1/app/src/main/java/$domain_dir/$var
-cp -r $TEMPLATE_PROJECT_NAME/app/src/main/java/com/dtspread/apps/$TEMPLATE_PROJECT_LOW_NAME/* $1/app/src/main/java/$domain_dir/$var
+mkdir -p $1/app/src/main/java/$package_dir
+cp -r $TEMPLATE_PROJECT_NAME/app/src/main/java/com/dtspread/apps/$TEMPLATE_PROJECT_LOW_NAME/* $1/app/src/main/java/$package_dir
 
 #replace application name
 echo "replace application name"
@@ -49,7 +50,8 @@ sed -i "s/$TEMPLATE_PROJECT_NAME/$1/g" `grep $TEMPLATE_PROJECT_NAME -rl $1/app`
 
 #replace application package name
 echo "replace application package name"
-sed -i "s/com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME/$domain.$var/g" `grep com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME -rl $1/app`
+sed -i "s/com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME/$package/g" `grep com.dtspread.apps.$TEMPLATE_PROJECT_LOW_NAME -rl $1/app`
 
 echo "All has been done !"
+
 
