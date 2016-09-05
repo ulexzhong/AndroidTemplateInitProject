@@ -7,9 +7,10 @@
 目录介绍：
 Template文件为AndroidStudio项目结构的模板工程
 build文件为生成脚本
+build_mac文件为mac系统用的生成脚本，使用方式同build
 
 使用方式：
-在shell环境下输入命令： ./build ProjectName packageName 
+在shell环境下输入命令： ./build ProjectName packageName （mac中：  ./build_mac ProjectName packageName）
 ProjectName 必须输入，并且该目录下唯一
 packageName 字符串以.为分割符，缺省值为com.example.apps
 例如：  ./build Test com.example.apps 
